@@ -10,23 +10,25 @@ const ScoringHeader: React.FC = () => {
   return (
     <div className={style.scoring_headerControls}>
       <label className={style.switchLabel}>
-        <span>Survey is a quiz: </span>
+        <span>Quiz: </span>
         <input
           type="checkbox"
           checked={scoringModeAuto}
           onChange={() => setScoringModeAuto((s) => !s)}
         />
       </label>
-      <ScoringHeaderBTN
-        handleClickFXN={saveChanges}
-        title="Save Scoring Logic"
-        label="Save"
-      />
-      <ScoringHeaderBTN
-        title="Reset points to zero"
-        label="Reset"
-        handleClickFXN={resetAllPoints}
-      />
+      <span className={style.scoring_headerButtons}>
+        <ScoringHeaderBTN
+          handleClickFXN={saveChanges}
+          title="Save Scoring Logic"
+          label="Save"
+        />
+        <ScoringHeaderBTN
+          title="Reset points to zero"
+          label="Reset"
+          handleClickFXN={resetAllPoints}
+        />
+      </span>
     </div>
   );
 };

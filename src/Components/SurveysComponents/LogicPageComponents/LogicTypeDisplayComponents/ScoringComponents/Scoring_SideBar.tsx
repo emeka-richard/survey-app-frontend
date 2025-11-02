@@ -44,6 +44,7 @@ const ScoringSideBar: React.FC<ScoringSideBarProps> = ({
             </li>
           ))}
         </ul>
+                  {/* <hr /> */}
         <div className={styles.previewTotal}>
           <strong>Total:</strong>
           <span>{computeTotals.grandTotal} pts</span>

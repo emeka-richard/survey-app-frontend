@@ -10,10 +10,8 @@ const LogicPage = () => {
     "Skip/Branch",
     "Scoring",
     "Piping",
-    "Default Values",
+    "Prefill",
     "Quotas",
-    "Randomisation",
-    "Validation",
     "Test Mode",
   ];
 
