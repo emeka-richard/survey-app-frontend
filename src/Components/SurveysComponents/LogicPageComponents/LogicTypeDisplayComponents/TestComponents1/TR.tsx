@@ -1,12 +1,36 @@
 import React from "react";
+import { useParams, useLocation } from "react-router-dom";
 import styles from "./testComponents.module.css";
-import { useAppStateMgtContext } from "../../Utils/AppContext";
+import { useAppStateMgtContext } from "../../../../../Utils/AppContext";
 import { simulateSurvey, SimulationOptions, SimulationResult } from "./SimulationEngine";
 
 const defaultSeed = 12345;
 
 const TestRunner: React.FC = () => {
-  const { sections, surveyData } = useAppStateMgtContext();
+  const { sections, surveyData, setSurveyData, setSections } = useAppStateMgtContext();
+  const { id } = useParams<{ id?: string }>();
+  const location = useLocation();
+
+  // If a survey object is passed via navigation state, prefer that. Otherwise
+  // if the route param matches the current surveyData use the context data.
+  const providedSurvey = (location.state as unknown as { survey?: import("../../../../../Utils/dataTypes").surveyTypeProps })?.survey;
+
+  // derived references used for simulation — prefer providedSurvey when present
+  const activeSurvey = providedSurvey ?? (id && surveyData?.id === id ? surveyData : surveyData);
+  const activeSections = providedSurvey ? providedSurvey.sections : sections;
+
+  // If a survey was provided via navigation state, make it the active context so
+  // other components that rely on surveyData/sections can read it too.
+  React.useEffect(() => {
+    if (providedSurvey) {
+      try {
+        if (setSurveyData) setSurveyData(providedSurvey);
+        if (setSections) setSections(providedSurvey.sections);
+      } catch {
+        // ignore failures — this is a best-effort sync
+      }
+    }
+  }, [providedSurvey, setSurveyData, setSections]);
   const [mode, setMode] = React.useState<SimulationOptions["mode"]>("random");
   const [seed, setSeed] = React.useState<number>(defaultSeed);
   const [respectShuffle, setRespectShuffle] = React.useState<boolean>(true);
@@ -18,12 +42,13 @@ const TestRunner: React.FC = () => {
     setRunning(true);
     try {
       const opts: SimulationOptions = { mode, seed, respectShuffle, maxSteps: 500 };
-      const res = simulateSurvey(sections, surveyData ?? null, opts);
+      // pass the active/derived survey and sections into the simulator
+      const res = simulateSurvey(activeSections, activeSurvey ?? null, opts);
       setResult(res);
     } finally {
       setRunning(false);
     }
-  }, [mode, seed, respectShuffle, sections, surveyData]);
+  }, [mode, seed, respectShuffle, activeSections, activeSurvey]);
 
   React.useEffect(() => {
     if (autoRun) runSimulation();

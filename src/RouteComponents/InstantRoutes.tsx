@@ -22,12 +22,15 @@ import {
   HomeAppLayout,
   ItemComponentLayout,
   CreateSurvey,
+  TestRunnerPage
 } from "./LazyRoutes";
 import ErrorPage from "../ErrorPage";
 import AuthWrapperLayout from "../Layouts/AuthLayouts/AuthWrapperLayout";
 import AuthFrameLayout from "../Layouts/AuthLayouts/AuthFrameLayout";
 import SpinIcon from "../Middlewares/SpinIcon/SpinIcon";
 import { AppProvider } from "../Utils/AppContext";
+import { SurveysTestRedirectWrapper } from "./BackUpRoutes";
+
 
 export const InstantRoutes: React.FC = () => {
   return (
@@ -96,22 +99,31 @@ export const InstantRoutes: React.FC = () => {
                   </Suspense>
                 }
               >
-                {/* <Route
+                <Route
+                  path="/surveys/create"
                   element={
                     <Suspense fallback={<SpinIcon />}>
                       <CreateSurvey />
                     </Suspense>
                   }
-                > */}
-                  <Route
-                    path="/surveys/create"
-                    element={
-                      <Suspense fallback={<SpinIcon />}>
-                        <CreateSurvey />
-                      </Suspense>
-                    }
-                  />
-                {/* </Route> */}
+                />
+                <Route
+                  path="/surveys/test"
+                  element={
+                    <Suspense fallback={<SpinIcon />}>
+                      {/* Redirect to the last/current survey test route when available */}
+                      <SurveysTestRedirectWrapper />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/surveys/test/:id"
+                  element={
+                    <Suspense fallback={<SpinIcon />}>
+                      <TestRunnerPage />
+                    </Suspense>
+                  }
+                />
               </Route>
             </Route>
             <Route

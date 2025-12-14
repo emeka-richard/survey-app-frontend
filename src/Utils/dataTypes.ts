@@ -21,6 +21,8 @@ export interface AppContextProps {
   setSurveyData: React.Dispatch<React.SetStateAction<surveyTypeProps>>;
   surveyTitle: string;
   setSurveyTitle: React.Dispatch<React.SetStateAction<string>>;
+  surveyDescription: string;
+  setSurveyDescription: React.Dispatch<React.SetStateAction<string>>;
   createEmptyQuestion: (props: QuestionTypeSelectList[]) => QuestionFrameProps;
   sections: sectionTypeProps;
   setSections: React.Dispatch<React.SetStateAction<sectionTypeProps>>;
@@ -199,6 +201,7 @@ export type LogicAction = {
 export type surveyTypeProps = {
   id: string;
   title: string;
+  description?: string;
   sections: sectionTypeProps;
   modifiedAt: string;
   isDirty: boolean;

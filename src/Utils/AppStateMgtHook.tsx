@@ -57,10 +57,14 @@ export const useAppStateMgtHook = () => {
   // The state for the title of the survey
   const [surveyTitle, setSurveyTitle] = React.useState<string>("");
 
+  // The state for the description of the survey
+  const [surveyDescription, setSurveyDescription] = React.useState<string>("");
+
   // Initialising the survey data
   const [surveyData, setSurveyData] = React.useState<surveyTypeProps>({
     id: currentSurveyID,
     title: surveyTitle || "New survey",
+    description: surveyDescription || "",
     sections: sections,
     modifiedAt: new Date().toISOString(),
     isDirty: true,
@@ -96,6 +100,8 @@ export const useAppStateMgtHook = () => {
     setPublishingStatus,
     surveyTitle,
     setSurveyTitle,
+    surveyDescription,
+    setSurveyDescription,
     surveyData,
     setSurveyData,
     createEmptyQuestion,

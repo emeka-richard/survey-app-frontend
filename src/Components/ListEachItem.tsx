@@ -2,12 +2,13 @@ import React from "react";
 import SpinIcon2 from "../Middlewares/SpinIcon/SpinIcon2";
 import style from "./ProjectsComponents/projectComponent.module.css";
 import ListEachItemOtherProps from "./ListEachItemOtherProps";
-import { MdOutlinePeopleOutline } from "react-icons/md";
-import { BsPersonCheck } from "react-icons/bs";
+// import { MdOutlinePeopleOutline } from "react-icons/md";
+// import { BsPersonCheck } from "react-icons/bs";
 import { FcSurvey } from "react-icons/fc";
-import { MdDelete } from "react-icons/md";
-import { RiFileEditFill } from "react-icons/ri";
+// import { MdDelete } from "react-icons/md";
+// import { RiFileEditFill } from "react-icons/ri";
 import ProgressBarItem from "./ProjectsComponents/ProgressBarItem";
+import ListEachItemOtherPropsComponent from "./ListEachItemOtherProps_Component";
 
 type ListEachItemProp = {
   sectionType: string;
@@ -33,22 +34,7 @@ const ListEachItem: React.FC<ListEachItemProp> = ({ sectionType }) => {
             {/* Number of surveys on the project */}
           </>
         )}
-        <ListEachItemOtherProps
-          Icon={MdOutlinePeopleOutline}
-          numberValue={2}
-          toolTip="Number of Collaborators"
-        />{" "}
-        {/* Number of Collaborators */}
-        <ListEachItemOtherProps
-          Icon={BsPersonCheck}
-          stringValue={"Collaborator"}
-          toolTip="Role"
-        />{" "}
-        {/* Number of Collaborators */}
-        <ListEachItemOtherProps Icon={RiFileEditFill} toolTip="Edit" />{" "}
-        {/* Edit Button */}
-        <ListEachItemOtherProps Icon={MdDelete} toolTip="Delete" />{" "}
-        {/* Delete Button */}
+        <ListEachItemOtherPropsComponent />
       </div>
     </section>
   );

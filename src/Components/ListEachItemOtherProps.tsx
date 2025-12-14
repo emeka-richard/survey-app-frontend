@@ -11,7 +11,7 @@ type ListEachItemOtherPropsPropsType = {
   backgroundColor?: string;
   padding?: string;
   fontSize?: string;
-  getCallBack?: (value: boolean) => void;
+  getCallBack?: () => void;
   // getFunctionCall?: (value: any) => void;
 };
 
@@ -30,7 +30,7 @@ const ListEachItemOtherProps: React.FC<ListEachItemOtherPropsPropsType> = ({
     <span
       className={style.listEachItemOtherProps_container}
       style={{ padding, backgroundColor }}
-      onClick={() => getCallBack && getCallBack(true)}
+      onClick={() => getCallBack && getCallBack()}
     >
       <Icon style={{ fontSize: IconSize || 20, color: `var(--navy-blue)` }} />
       {numberValue || (stringValue && <p>{numberValue || stringValue}</p>)}

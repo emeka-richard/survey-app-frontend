@@ -23,12 +23,12 @@ const BuilderContentBody: React.FC<BuilderContentBodyProps> = ({
   onRemoveQuestionFrame,
   deleteSection,
 }) => {
-  const { frameCall, sections, setSections, setSurveyTitle } =
+  const { frameCall, sections, setSections } =
     useAppStateMgtContext();
 
   return (
     <div className={style.builderContentBody_main}>
-      {frameCall && <FormHeader onGetSurveyTitle={setSurveyTitle} />}
+      {frameCall && <FormHeader />}
       <section className={style.builderContentBody_main}>
         <SortableListAbstractComponent
           items={sections}

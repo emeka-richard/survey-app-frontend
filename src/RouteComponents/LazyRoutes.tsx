@@ -28,6 +28,9 @@ const ItemComponentLayout = React.lazy(
 const CreateSurvey = React.lazy(
   () => import("../Layouts/CreateSurveyLayouts/CreateSurvey")
 );
+const TestRunnerPage = React.lazy(
+  () => import("../AppPages/CreateSurveyPages/TestRunnerPage")
+);
 
 export {
   CreateSurvey,
@@ -46,4 +49,5 @@ export {
   SettingsPage,
   SurveysPage,
   UserProfilePage,
+  TestRunnerPage
 };
