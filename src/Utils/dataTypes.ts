@@ -465,3 +465,19 @@ export type PipingSidebarProps = {
   availableQuestions: AvailableQuestionForPiping[];
   insertTokenFor: (id: string) => void;
 };
+
+// -----------------------------------------------------------------------------
+export type TestRunnerButtonTypes = {
+  buttonLabel: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  variant?: "primary" | "secondary";
+  type?: "button" | "submit" | "reset";
+  ariaLabel?: string;
+  disabled?: boolean;
+  className?: string;
+};
+
+export type TestRunnerStatsProps = {
+    statFigure: number;
+    label: string;
+};

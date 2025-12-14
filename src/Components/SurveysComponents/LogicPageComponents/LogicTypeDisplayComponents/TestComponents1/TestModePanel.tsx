@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./testComponents.module.css";
 import { useAppStateMgtContext } from "../../../../../Utils/AppContext";
-import { sectionTypeProps } from "../../../../../Utils/dataTypes";
+// import { sectionTypeProps } from "../../../../../Utils/dataTypes";
 import { useNavigate } from "react-router-dom";
 // import ListEachItemOtherPropsComponent from "../../../../ListEachItemOtherProps_Component";
 import { MdOutlineSpeakerNotes } from "react-icons/md";
@@ -10,11 +10,12 @@ import ListEachItemOtherProps from "../../../../ListEachItemOtherProps";
 import TestModeModalComponent from "./TestModeModal";
 
 const TestModePanel: React.FC = () => {
-  const { surveyData } = useAppStateMgtContext();
-  const surveySections: sectionTypeProps = surveyData.sections;
+  const { surveyData, createNavBTNLabel, logicNavBTNLabel } = useAppStateMgtContext();
+  // const surveySections: sectionTypeProps = surveyData.sections;
   const navigate = useNavigate();
-  console.log(surveySections); //checking the sections content of the surveyData
+  // console.log(surveySections); //checking the sections content of the surveyData
 
+  console.log(createNavBTNLabel, logicNavBTNLabel);
   const [showDescription, setShowDescription] = React.useState(false);
   const [requestState, setRequestState] = React.useState("");
 
@@ -35,9 +36,14 @@ const TestModePanel: React.FC = () => {
     if (idToUse) {
       // include the full survey in navigation state so the Test Runner can prefer
       // the passed object instead of having to reload from context/server
-      navigate(`/surveys/test/${idToUse}`, { state: { survey: surveyData } });
+      navigate(`/surveys/test/${idToUse}`, { state: surveyData });
+      console.log("how many sections:", surveyData.sections.length);
     } else {
-      navigate("/surveys/test", { state: { survey: surveyData } });
+      navigate("/surveys/test", { state: surveyData });
+      console.log(
+        "how many sections (no id trigger):",
+        surveyData.sections.length
+      );
     }
   };
 
